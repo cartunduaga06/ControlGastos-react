@@ -7,7 +7,7 @@ const Modal = ({ setModal, animarModal, setAnimarModal, guardarGasto }) => {
 
     const [nombre, setNombre] = useState('')
     const [cantidad, setCantidad] = useState('')
-    const [select, setSelect] = useState('')
+    const [categoria, setCategoria] = useState('')
     const [mensaje, setMensaje] = useState('')
 
 
@@ -18,11 +18,11 @@ const Modal = ({ setModal, animarModal, setAnimarModal, guardarGasto }) => {
 
             setModal(false)
         }, 500)
-    }
+    } 
 
     const handleSubmit = (e) => {
         e.preventDefault()
-        if ([nombre, cantidad, select].includes('')) {
+        if ([nombre, cantidad, categoria].includes('')) {
             setMensaje('Todos los campos son obligatorios')
 
             setTimeout(() => {
@@ -32,7 +32,7 @@ const Modal = ({ setModal, animarModal, setAnimarModal, guardarGasto }) => {
             return
         }
 
-        guardarGasto({ nombre, cantidad, select })
+        guardarGasto({ nombre, cantidad, categoria })
 
     }
 
@@ -69,7 +69,7 @@ const Modal = ({ setModal, animarModal, setAnimarModal, guardarGasto }) => {
 
                 </div>
                 <div className='campo'>
-                    <label htmlFor='mombre'>Cantidad</label>
+                    <label htmlFor='cantidad'>Cantidad</label>
                     <input
 
                         type='number'
@@ -84,12 +84,12 @@ const Modal = ({ setModal, animarModal, setAnimarModal, guardarGasto }) => {
                 </div>
 
                 <div className='campo'>
-                    <label htmlFor='mombre'>Categoria</label>
+                    <label htmlFor='categoria'>Categoria</label>
                     <select
                         id='categoria'
                         className='u-full-width'
-                        value={select}
-                        onChange={e => setSelect(e.target.value)}
+                        value={categoria}
+                        onChange={e => setCategoria(e.target.value)}
                     >
                         <option value=''>-- Seleccione --</option>
                         <option value='alimentacion'>Alimentacion</option>
