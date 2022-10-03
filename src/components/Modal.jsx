@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react'
 import Mensaje from './Mensaje'
 
 
-const Modal = ({ setModal, animarModal, setAnimarModal, guardarGasto, gastoEditar }) => {
+const Modal = ({ setModal, animarModal, setAnimarModal, guardarGasto, gastoEditar, setGastoEditar }) => {
 
     const [nombre, setNombre] = useState('')
     const [cantidad, setCantidad] = useState('')
@@ -25,7 +25,7 @@ const Modal = ({ setModal, animarModal, setAnimarModal, guardarGasto, gastoEdita
 
     const ocultarModal = () => {
         setAnimarModal(false)
-
+        setGastoEditar({})
         setTimeout(() => {
 
             setModal(false)

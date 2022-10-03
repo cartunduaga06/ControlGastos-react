@@ -54,6 +54,7 @@ const Gastos = ({gasto, setGastoEditar, eliminarGasto}) => {
 
                
                 onClick={() => eliminarGasto(id)}
+                destructive={true}
             >
                 Eliminar
             </SwipeAction>
