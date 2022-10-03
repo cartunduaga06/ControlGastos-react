@@ -9,6 +9,7 @@ import {
 import 'react-swipeable-list/dist/styles.css';
 import { formatearFecha } from '../helpers/injdex';
 
+
 import IconoAhorro from '../img//icono_ahorro.svg'
 import IconoCasa from '../img//icono_casa.svg'
 import IconoComida from '../img//icono_comida.svg'
@@ -31,7 +32,7 @@ const diccionarioIconos = {
 }
 
 
-const Gastos = ({gasto}) => {
+const Gastos = ({gasto, setGastoEditar, eliminarGasto}) => {
 
  const {categoria, nombre, cantidad, id, fecha} = gasto;
 
@@ -40,7 +41,7 @@ const Gastos = ({gasto}) => {
         <LeadingActions>
             <SwipeAction
                 
-                onClick={() => console.log('Leading action 1 clicked')}
+                onClick={() => setGastoEditar(gasto)}
             >
                     Editar
            </SwipeAction>
@@ -52,7 +53,7 @@ const Gastos = ({gasto}) => {
             <SwipeAction
 
                
-                onClick={() => console.log('Trailing action 1 clicked')}
+                onClick={() => eliminarGasto(id)}
             >
                 Eliminar
             </SwipeAction>
