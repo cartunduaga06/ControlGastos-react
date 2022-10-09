@@ -4,14 +4,22 @@ import IconoNuevoGasto from './img/nuevo-gasto.svg'
 import Modal from './components/Modal'
 import { generarId } from './helpers/injdex'
 import ListadoGatos from './components/ListadoGatos'
+import Filtros from './components/Filtros'
 
 function App() {
-  const [presupuesto, setPresupuesto] = useState(0)
+  const [presupuesto, setPresupuesto] = useState(
+Number(localStorage.getItem('presupuesto')) ?? 0
+  )
   const [isValidate, setIsValidate] = useState(false)
   const [modal, setModal] = useState(false)
   const [animarModal, setAnimarModal] = useState(false)
-  const [gastos, setGastos] = useState([])
+  const [gastos, setGastos] = useState(
+    
+    localStorage.getItem('gastos')? JSON.parse(localStorage.getItem('gastos')) : []
+  )
   const [gastoEditar  , setGastoEditar] = useState({})
+  const [filtro, setFiltro] = useState('')
+  const [gastosFiltrados, setgastosFiltrados] = useState([])
 
   useEffect(() => {
     if(Object.keys(gastoEditar).length > 0){
@@ -23,6 +31,30 @@ function App() {
       
     }
   }, [gastoEditar])
+
+  useEffect(() => {
+    localStorage.setItem('presupuesto', presupuesto ??0)
+  }, [presupuesto])
+
+  useEffect(() => {
+    const presupuestoLS = Number(localStorage.getItem('presupuesto'))
+    if (presupuestoLS > 0) {
+        setIsValidate(true)
+    }
+  }, [])
+
+  useEffect(() => {
+    localStorage.setItem('gastos', JSON.stringify(gastos))
+  }, [gastos])
+
+  useEffect(() => {
+   if (filtro){
+      const gastosFiltrados = gastos.filter(gasto => gasto.categoria === filtro)
+      setgastosFiltrados(gastosFiltrados)
+    }
+  }, [filtro])
+
+ 
  
   const handleNuevoGasto = () => {
     setModal(true)
@@ -67,8 +99,11 @@ function App() {
     <div className={modal ? 'fijar': ''}>
       <Header
         gastos = {gastos}
+        setGastos = {setGastos}
+        
         presupuesto={presupuesto} setPresupuesto={setPresupuesto}
         isValidate={isValidate} setIsValidate={setIsValidate}
+        
       />
 
 
@@ -76,12 +111,21 @@ function App() {
 
       {isValidate && (
         <>
+        
         <main>
-
+        <Filtros 
+          filtro={filtro}
+          setFiltro={setFiltro}       
+          />
           <ListadoGatos gastos={gastos}
           setGastoEditar={setGastoEditar}
           eliminarGasto={eliminarGasto}
+          gastosFiltrados={gastosFiltrados}
+          filtro={filtro}
+
           ></ListadoGatos>
+
+          
 
         </main>
 

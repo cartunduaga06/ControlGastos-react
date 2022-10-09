@@ -4,15 +4,22 @@ import NuevoPresupuesto from './NuevoPresupuesto'
 
 
 
-const Header = ({presupuesto, setPresupuesto, isValidate, setIsValidate, gastos }) => {
+const Header = ({presupuesto, setPresupuesto, isValidate, setIsValidate, gastos, setGastos }) => {
   return (
     <header>
         <h1> Planificador de gastos</h1>
 
         {isValidate ? (
-            <ControlPresupuesto presupuesto={presupuesto} gastos={gastos} />):(<NuevoPresupuesto 
+            <ControlPresupuesto 
+            presupuesto={presupuesto} 
+            gastos={gastos}
+            setGastos={setGastos}
+            setPresupuesto={setPresupuesto}
+            setIsValidate = {setIsValidate}
+            
+            />):(<NuevoPresupuesto 
             presupuesto={presupuesto} setPresupuesto={setPresupuesto}
-               setIsValidate = {setIsValidate}/>) }
+               setIsValidate = {setIsValidate} setGastos={setGastos} />) }
         
     </header>
   )
